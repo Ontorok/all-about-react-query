@@ -1,8 +1,5 @@
 import { AxiosError } from "axios";
-import { SuperHero } from "../models/SuperHero.model";
 import Loader from "../components/Loader";
-import { useSuperHeros } from "../hooks/useSuperHeros";
-import { Link } from "react-router-dom";
 import { useProducts } from "../hooks/useProducts";
 import { Product } from "../models/Product.model";
 
@@ -64,7 +61,7 @@ const ReactQueryPage = () => {
           })}
         </tbody>
       </table>
-      );
+
       {isError && <h2 className="bg-red-100 text-red-800 p-2 text-center rounded mb-2">{error?.message}</h2>}
     </div>
   );

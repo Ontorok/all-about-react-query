@@ -77,7 +77,7 @@ const Layout = () => {
           </div>
         </div>
       </nav>
-      <div className="w-4/5 h-screen mx-auto my-0 bg-slate-50 p-4">{<Outlet />}</div>
+      <div className="w-4/5 h-screen mx-auto my-0 bg-slate-50 p-4 overflow-y-auto">{<Outlet />}</div>
     </div>
   );
 };
