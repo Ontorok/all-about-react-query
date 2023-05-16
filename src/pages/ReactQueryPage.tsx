@@ -1,36 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { SuperHero } from "../models/SuperHero.model";
-import { QUERY_KEYS } from "../constants/queryKeys";
 import Loader from "../components/Loader";
+import { useSuperHeros } from "../hooks/useSuperHeros";
+import { Link } from "react-router-dom";
 
 const ReactQueryPage = () => {
-  const fetchHeros = async (): Promise<SuperHero[]> => {
-    const res = await axios.get("http://localhost:4100/superheroes");
-    return res.data;
-  };
-
   const onSuccess = (data: SuperHero[]) => {
-    console.log({
-      text: "Side effect performed affter fetching data",
-      data,
-    });
+    // console.log({
+    //   text: "Side effect performed affter fetching data",
+    //   data,
+    // });
   };
 
   const onError = (err: AxiosError) => {
-    console.log({
-      text: "Side effect performed affter encountering error",
-      err,
-    });
+    // console.log({
+    //   text: "Side effect performed affter encountering error",
+    //   err,
+    // });
   };
-  const { data, isLoading, isError, error, isFetching, refetch } = useQuery<SuperHero[], AxiosError, string[]>({
-    queryKey: [QUERY_KEYS.getSuperHeros],
-    queryFn: fetchHeros,
-    refetchOnWindowFocus: false,
-    onSuccess,
-    onError,
-    select: (data: SuperHero[]): string[] => data.map((hero) => hero.name),
-  });
+  const { data, isLoading, isError, error, isFetching, refetch } = useSuperHeros(onSuccess, onError);
 
   if (isLoading)
     return (
@@ -52,8 +40,14 @@ const ReactQueryPage = () => {
         {isFetching && <Loader />}
       </h2>
 
-      {data?.map((hero) => {
-        return <h5>{hero}</h5>;
+      {data?.map((hero, index) => {
+        return (
+          <Link key={hero.id} to={`/react-query/${hero.id}`}>
+            <h5 key={index + 1} className="cursor-pointer">
+              {hero.name}
+            </h5>
+          </Link>
+        );
       })}
       {isError && <h2 className="bg-red-100 text-red-800 p-2 text-center rounded mb-2">{error?.message}</h2>}
     </div>

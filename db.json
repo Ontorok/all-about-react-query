@@ -20,5 +20,27 @@
       "alterEgo": "James Bond",
       "id": 4
     }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "heroId": 1,
+      "name": "Robocop"
+    },
+    {
+      "id": 2,
+      "heroId": 2,
+      "name": "Monica"
+    },
+    {
+      "id": 3,
+      "heroId": 3,
+      "name": "Rebeca"
+    },
+    {
+      "id": 4,
+      "heroId": 4,
+      "name": "Monalissa"
+    }
   ]
 }
