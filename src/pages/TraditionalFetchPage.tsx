@@ -10,7 +10,7 @@ const TraditionalFetchPage = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("http://localhost:4000/superheroes")
+      .get("http://localhost:4100/superheroes")
       .then((res) => {
         setData(res.data);
         setIsLoading(false);
@@ -21,27 +21,16 @@ const TraditionalFetchPage = () => {
       });
   }, []);
 
-  if (isLoading)
-    return (
-      <h2 className="bg-sky-800 text-white p-2 text-center rounded mb-2">
-        Loading....
-      </h2>
-    );
+  if (isLoading) return <h2 className="bg-sky-800 text-white p-2 text-center rounded mb-2">Loading....</h2>;
 
   return (
     <div>
-      <h2 className="bg-sky-800 text-white p-2 text-center rounded mb-2">
-        Traditional Fetch Page
-      </h2>
+      <h2 className="bg-sky-800 text-white p-2 text-center rounded mb-2">Traditional Fetch Page</h2>
       {data.map((hero) => {
         return <h5 key={hero.id}>{hero.name}</h5>;
       })}
 
-      {error && (
-        <h2 className="bg-red-100 text-red-800 p-2 text-center rounded mb-2">
-          {error}
-        </h2>
-      )}
+      {error && <h2 className="bg-red-100 text-red-800 p-2 text-center rounded mb-2">{error}</h2>}
     </div>
   );
 };

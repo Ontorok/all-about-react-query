@@ -3,9 +3,11 @@ import { SuperHero } from "../models/SuperHero.model";
 import Loader from "../components/Loader";
 import { useSuperHeros } from "../hooks/useSuperHeros";
 import { Link } from "react-router-dom";
+import { useProducts } from "../hooks/useProducts";
+import { Product } from "../models/Product.model";
 
 const ReactQueryPage = () => {
-  const onSuccess = (data: SuperHero[]) => {
+  const onSuccess = (data: Product[]) => {
     // console.log({
     //   text: "Side effect performed affter fetching data",
     //   data,
@@ -18,7 +20,8 @@ const ReactQueryPage = () => {
     //   err,
     // });
   };
-  const { data, isLoading, isError, error, isFetching, refetch } = useSuperHeros(onSuccess, onError);
+  // const { data, isLoading, isError, error, isFetching, refetch } = useSuperHeros(onSuccess, onError);
+  const { data, isLoading, isError, error, isFetching, refetch } = useProducts(onSuccess, onError);
 
   if (isLoading)
     return (
@@ -39,16 +42,29 @@ const ReactQueryPage = () => {
         </button>
         {isFetching && <Loader />}
       </h2>
-
-      {data?.map((hero, index) => {
-        return (
-          <Link key={hero.id} to={`/react-query/${hero.id}`}>
-            <h5 key={index + 1} className="cursor-pointer">
-              {hero.name}
-            </h5>
-          </Link>
-        );
-      })}
+      <table>
+        <thead>
+          <tr>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Thumbnail</td>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.map((product) => {
+            return (
+              <tr>
+                <td>{product.title}</td>
+                <td>{product.description}</td>
+                <td>
+                  <img src={product.thumbnail} width={40} height={20} alt={product.title} />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      );
       {isError && <h2 className="bg-red-100 text-red-800 p-2 text-center rounded mb-2">{error?.message}</h2>}
     </div>
   );
