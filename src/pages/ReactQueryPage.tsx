@@ -2,8 +2,10 @@ import { AxiosError } from "axios";
 import Loader from "../components/Loader";
 import { useProducts } from "../hooks/useProducts";
 import { Product } from "../models/Product.model";
+import { useNavigate } from "react-router-dom";
 
 const ReactQueryPage = () => {
+  const navigate = useNavigate();
   const onSuccess = (data: Product[]) => {
     // console.log({
     //   text: "Side effect performed affter fetching data",
@@ -39,22 +41,28 @@ const ReactQueryPage = () => {
         </button>
         {isFetching && <Loader />}
       </h2>
-      <table>
+      <table className="border-collapse border border-slate-400">
         <thead>
           <tr>
-            <td>Title</td>
-            <td>Description</td>
-            <td>Thumbnail</td>
+            <th className="border border-slate-300 p-2">Title</th>
+            <th className="border border-slate-300 p-2">Description</th>
+            <th className="border border-slate-300 p-2">Thumbnail</th>
           </tr>
         </thead>
         <tbody>
           {data?.map((product) => {
             return (
-              <tr>
-                <td>{product.title}</td>
-                <td>{product.description}</td>
-                <td>
-                  <img src={product.thumbnail} width={40} height={20} alt={product.title} />
+              <tr
+                key={product.id}
+                className="hover:bg-slate-200 cursor-pointer"
+                onClick={() => {
+                  navigate(`/react-query/${product.id}`);
+                }}
+              >
+                <td className="border border-slate-300 p-2">{product.title}</td>
+                <td className="border border-slate-300 p-2">{product.description}</td>
+                <td className="border border-slate-300 p-2">
+                  <img className="w-10 h-7 mx-auto my-0" src={product.thumbnail} alt={product.title} />
                 </td>
               </tr>
             );
