@@ -1,10 +1,10 @@
 import Layout from "./components/Layout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TraditionalFetch from "./pages/TraditionalFetchPage";
-import ReactQuery from "./pages/ReactQueryPage";
 import HomePage from "./pages/HomePage";
-import RQSuperHero from "./pages/RQSuperHero";
+import RQProductsPage from "./pages/RQProductsPage";
 import RQProductPage from "./pages/RQProductPage";
+import RQPaginatedProducts from "./pages/RQPaginatedProducts";
 
 const routes = createBrowserRouter([
   {
@@ -13,7 +13,8 @@ const routes = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "/traditional-fetch", element: <TraditionalFetch /> },
-      { path: "/react-query", element: <ReactQuery /> },
+      { path: "/react-query", element: <RQProductsPage /> },
+      { path: "/react-paginated-query", element: <RQPaginatedProducts /> },
       { path: "/react-query/:id", element: <RQProductPage /> },
     ],
   },

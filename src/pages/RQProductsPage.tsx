@@ -4,7 +4,7 @@ import { useProducts } from "../hooks/useProducts";
 import { Product } from "../models/Product.model";
 import { useNavigate } from "react-router-dom";
 
-const ReactQueryPage = () => {
+const RQProductsPage = () => {
   const navigate = useNavigate();
   const onSuccess = (data: Product[]) => {
     // console.log({
@@ -75,4 +75,4 @@ const ReactQueryPage = () => {
   );
 };
 
-export default ReactQueryPage;
+export default RQProductsPage;

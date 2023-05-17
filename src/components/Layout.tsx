@@ -56,6 +56,16 @@ const Layout = () => {
             >
               React Query
             </NavLink>
+            <NavLink
+              to="/react-paginated-query"
+              className={({ isActive }) =>
+                `block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 ${
+                  isActive && "text-lg text-white"
+                }`
+              }
+            >
+              React Paginated Query
+            </NavLink>
           </div>
           <div>
             <a
