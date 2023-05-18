@@ -3,4 +3,5 @@ export const QUERY_KEYS = {
   getSuperHero: "getSuperHero",
   getProducts: "getProducts",
   getProduct: "getProduct",
+  getInfiniteProducts: "getInfiniteProducts",
 };

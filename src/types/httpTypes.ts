@@ -1,5 +1,5 @@
 export type ResponseType<T> = {
-  result: T[];
+  result: T;
   total: number;
   skip: number;
   limit: number;

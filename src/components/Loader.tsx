@@ -1,9 +1,16 @@
-const Loader = () => {
+type LoaderPropsType = {
+  color?: string;
+};
+
+const Loader = (props: LoaderPropsType) => {
+  const { color } = props;
   return (
     <div role="status" className="inline mx-2 my-2">
       <svg
         aria-hidden="true"
-        className="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+        className={`inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 ${
+          !color ? "fill-gray-600" : `fill-${color}-600`
+        } dark:fill-gray-300`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

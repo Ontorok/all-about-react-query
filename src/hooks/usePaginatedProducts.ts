@@ -4,7 +4,7 @@ import axios, { AxiosError } from "axios";
 import { QUERY_KEYS } from "../constants/queryKeys";
 import { ResponseType } from "../types/httpTypes";
 
-const fetchProducts = async (pageNumber: number, pageSize: number): Promise<ResponseType<Product>> => {
+const fetchProducts = async (pageNumber: number, pageSize: number): Promise<ResponseType<Product[]>> => {
   const res = await axios.get(
     `https://dummyjson.com/products?limit=${pageSize}&skip=${pageNumber === 1 ? 0 : (pageNumber - 1) * pageSize}`
   );
@@ -21,7 +21,7 @@ const fetchProducts = async (pageNumber: number, pageSize: number): Promise<Resp
 };
 
 export const usePaginatedProducts = (pageNumber: number, pageSize: number) => {
-  return useQuery<ResponseType<Product>, AxiosError>({
+  return useQuery<ResponseType<Product[]>, AxiosError>({
     queryKey: [QUERY_KEYS.getProducts, pageNumber, pageSize],
     queryFn: () => fetchProducts(pageNumber, pageSize),
     refetchOnWindowFocus: false,
